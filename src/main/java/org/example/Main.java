@@ -12,5 +12,7 @@ public class Main {
     graph.addEdge("KSM", "MSA");
     graph.addEdge("MSA", "KLF");
     graph.print();
+//    graph.removeNode("KSM");
+//    graph.removeEdge("KSM", "MSA");
     }
 }
