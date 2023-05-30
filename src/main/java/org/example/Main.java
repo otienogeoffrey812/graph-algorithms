@@ -7,12 +7,13 @@ public class Main {
     graph.addNode("NBO");
     graph.addNode("MSA");
     graph.addNode("KLF");
-    graph.addEdge("NBO", "KSM");
     graph.addEdge("NBO", "MSA");
+    graph.addEdge("NBO", "KSM");
     graph.addEdge("KSM", "MSA");
     graph.addEdge("MSA", "KLF");
     graph.print();
 //    graph.removeNode("KSM");
 //    graph.removeEdge("KSM", "MSA");
+    graph.traverseDepthFirstIterative("KSM");
     }
 }
