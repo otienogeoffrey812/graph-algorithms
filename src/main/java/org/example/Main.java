@@ -14,6 +14,6 @@ public class Main {
     graph.print();
 //    graph.removeNode("KSM");
 //    graph.removeEdge("KSM", "MSA");
-    graph.traverseDepthFirstIterative("KSM");
+    graph.traverseBreadthFirst("NBO");
     }
 }
