@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Graph {
     private class Node{
@@ -15,7 +13,6 @@ public class Graph {
             return label;
         }
     }
-    private Node root;
     HashMap<String, Node> nodes = new HashMap<>();
     HashMap<Node, List<Node>> adjacencyList = new HashMap<>();
 
@@ -66,4 +63,53 @@ public class Graph {
         }
     }
 
+    public void traverseDepthFirstRecursion(String label){
+        var node = nodes.get(label);
+        if (node == null)
+            return;
+        traverseDepthFirstRecursion(node, new HashSet<>());
+    }
+
+    private void traverseDepthFirstRecursion(Node node, HashSet<Node> visited) {
+        if (node == null)
+            return;
+
+        System.out.println(node);
+        visited.add(node);
+
+        for (var n : adjacencyList.get(node)) {
+            if (!visited.contains(n)) {
+                traverseDepthFirstRecursion(n, visited);
+            }
+        }
+    }
+
+    public void traverseDepthFirstIterative(String label){
+        var node = nodes.get(label);
+        if (node == null)
+            return;
+
+        HashSet<Node> visited = new HashSet<>();
+        Stack<Node> stack = new Stack<>();
+
+        stack.add(node);
+
+        while (!stack.isEmpty()){
+            var current = stack.pop();
+
+            if (visited.contains(current))
+                continue;
+
+            System.out.println(current);
+            visited.add(current);
+
+            for (var n : adjacencyList.get(current)) {
+                if (!visited.contains(n)) {
+                    stack.add(n);
+                }
+            }
+        }
+
+
+    }
 }
