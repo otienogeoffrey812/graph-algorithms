@@ -110,6 +110,31 @@ public class Graph {
             }
         }
 
+    }
 
+    public void traverseBreadthFirst(String label){
+        var node = nodes.get(label);
+        if (node == null)
+            return;
+
+        HashSet<Node> visited = new HashSet<>();
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()){
+            var current = queue.remove();
+
+            if (visited.contains(current))
+                continue;
+
+            System.out.println(current);
+            visited.add(current);
+
+            for (var n : adjacencyList.get(current)){
+                if (!visited.contains(n)){
+                    queue.add(n);
+                }
+            }
+        }
     }
 }
