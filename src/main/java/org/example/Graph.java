@@ -53,7 +53,6 @@ public class Graph {
 
         adjacencyList.get(fromNode).remove(toNode);
     }
-
     public void print(){
         for (var source: adjacencyList.keySet()){
             var target = adjacencyList.get(source);
@@ -62,14 +61,12 @@ public class Graph {
             }
         }
     }
-
     public void traverseDepthFirstRecursion(String label){
         var node = nodes.get(label);
         if (node == null)
             return;
         traverseDepthFirstRecursion(node, new HashSet<>());
     }
-
     private void traverseDepthFirstRecursion(Node node, HashSet<Node> visited) {
         if (node == null)
             return;
@@ -83,7 +80,6 @@ public class Graph {
             }
         }
     }
-
     public void traverseDepthFirstIterative(String label){
         var node = nodes.get(label);
         if (node == null)
@@ -136,5 +132,29 @@ public class Graph {
                 }
             }
         }
+    }
+
+    public List<String> topologicalSort(){
+        ArrayList<String> list = new ArrayList<>();
+        HashSet<Node> visited = new HashSet<>();
+        Stack<Node> stack = new Stack<>();
+
+        for (var node: nodes.values()){
+            topologicalSort(node, visited, stack);
+        }
+
+        while (!stack.isEmpty()){
+            list.add(stack.pop().label);
+        }
+        return list;
+    }
+    private void topologicalSort(Node node, HashSet<Node> visited, Stack<Node> stack) {
+        if(visited.contains(node)) return;
+        visited.add(node);
+
+        for (var neighbour: adjacencyList.get(node)){
+            topologicalSort(neighbour, visited, stack);
+        }
+        stack.push(node);
     }
 }
