@@ -17,10 +17,10 @@ public class Main {
 //        graph.removeNode("KSM");
 //        graph.removeEdge("KSM", "MSA");
         graph.print();
-        graph.traverseDepthFirstRecursion("NBO");
+        graph.traverseDepthFirstRecursion("NBO");;
         graph.traverseDepthFirstIterative("NBO");
         graph.traverseBreadthFirst("NBO");
-
         System.out.println(graph.topologicalSort());
+        System.out.println(graph.hasCycle());
     }
 }

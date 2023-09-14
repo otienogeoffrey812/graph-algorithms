@@ -133,7 +133,6 @@ public class Graph {
             }
         }
     }
-
     public List<String> topologicalSort(){
         ArrayList<String> list = new ArrayList<>();
         HashSet<Node> visited = new HashSet<>();
@@ -156,5 +155,35 @@ public class Graph {
             topologicalSort(neighbour, visited, stack);
         }
         stack.push(node);
+    }
+
+    public boolean hasCycle(){
+        HashSet<Node> all = new HashSet<>();
+        all.addAll(nodes.values());
+
+        HashSet<Node> visiting = new HashSet<>();
+        HashSet<Node> visited = new HashSet<>();
+
+        while (!all.isEmpty()){
+            var current = all.iterator().next();
+            if (hasCycle(current, all, visiting, visited)) return true;
+        }
+        return false;
+    }
+    private boolean hasCycle(Node node, HashSet<Node> all, HashSet<Node> visiting, HashSet<Node> visited) {
+        all.remove(node);
+        visiting.add(node);
+
+        for (var neighbour: adjacencyList.get(node)){
+            if (visited.contains(neighbour)) continue;
+            if (visiting.contains(neighbour)) return true;
+
+           if(hasCycle(neighbour, all, visiting, visited)) return true;
+        }
+
+        visiting.remove(node);
+        visited.add(node);
+
+        return  false;
     }
 }
