@@ -10,3 +10,7 @@
 * Breadth First Traversal
 * Topological Sort
 * Cycle Detection - Directed Graph
+
+## Weighted Graph
+* Add Node
+* Add Edge
