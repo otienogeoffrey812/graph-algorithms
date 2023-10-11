@@ -33,10 +33,10 @@ public class Main {
         graph.addNode("KLF");
         graph.addEdge("NBO", "MSA", 3);
         graph.addEdge("NBO", "KSM", 5);
-        graph.addEdge("KSM", "KLF", 7);
+        graph.addEdge("KSM", "KLF", 1);
         graph.addEdge("KSM", "MSA", 8);
-        graph.addEdge("MSA", "KLF", 10);
+        graph.addEdge("KLF", "MSA", 1);
         graph.print();
-
+        System.out.println(graph.shortestDistance("KSM", "MSA"));
     }
 }

@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class WeightedGraph {
     private class Node{
@@ -32,7 +30,6 @@ public class WeightedGraph {
             this.to = to;
             this.weight = weight;
         }
-
         @Override
         public String toString(){
             return from + "->" + to;
@@ -62,4 +59,45 @@ public class WeightedGraph {
         }
     }
 
+    private class NodeEntry{
+        private Node node;
+        private int priority;
+        public NodeEntry(Node node, int priority) {
+            this.node = node;
+            this.priority = priority;
+        }
+    }
+    public int shortestDistance(String from, String to){
+        var fromNode = nodes.get(from);
+        HashMap<Node, Integer> distances = new HashMap<>();
+
+        for (var node: nodes.values()){
+            distances.put(node, Integer.MAX_VALUE);
+        }
+        distances.replace(fromNode, 0);
+
+        HashSet<Node> visited = new HashSet<>();
+
+        PriorityQueue<NodeEntry> queue = new PriorityQueue<>(
+                Comparator.comparingInt(ne->ne.priority)
+        );
+
+        queue.add(new NodeEntry(fromNode, 0));
+
+        while (!queue.isEmpty()){
+            var current = queue.remove().node;
+            visited.add(current);
+
+            for (var edge: current.getEdges()){
+                if (visited.contains(edge.to)) continue;
+
+                var newDistance = distances.get(current) + edge.weight;
+                if (newDistance < distances.get(edge.to)) {
+                    distances.replace(edge.to, newDistance);
+                    queue.add(new NodeEntry(edge.to, newDistance));
+                }
+            }
+        }
+        return distances.get(nodes.get(to));
+    }
 }

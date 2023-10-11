@@ -9,8 +9,9 @@
 * Depth First iterative
 * Breadth First Traversal
 * Topological Sort
-* Cycle Detection - Directed Graph
+* Cycle Detection
 
 ## Weighted Graph
 * Add Node
 * Add Edge
+* Shortest Distance
