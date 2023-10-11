@@ -38,5 +38,6 @@ public class Main {
         graph.addEdge("KLF", "MSA", 1);
         graph.print();
         System.out.println(graph.shortestDistance("KSM", "MSA"));
+        System.out.println(graph.shortestPath("KSM", "MSA"));
     }
 }

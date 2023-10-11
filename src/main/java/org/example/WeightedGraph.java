@@ -100,4 +100,58 @@ public class WeightedGraph {
         }
         return distances.get(nodes.get(to));
     }
+    public List<String> shortestPath(String from, String to){
+        var fromNode = nodes.get(from);
+        var toNode = nodes.get(to);
+
+        HashMap<Node, Integer> distances = new HashMap<>();
+
+        for (var node: nodes.values()){
+            distances.put(node, Integer.MAX_VALUE);
+        }
+        distances.replace(fromNode, 0);
+
+        HashSet<Node> visited = new HashSet<>();
+
+        HashMap<Node, Node> previousNodes = new HashMap<>();
+
+        PriorityQueue<NodeEntry> queue = new PriorityQueue<>(
+                Comparator.comparingInt(ne->ne.priority)
+        );
+
+        queue.add(new NodeEntry(fromNode, 0));
+
+        while (!queue.isEmpty()){
+            var current = queue.remove().node;
+            visited.add(current);
+
+            for (var edge: current.getEdges()){
+                if (visited.contains(edge.to)) continue;
+
+                var newDistance = distances.get(current) + edge.weight;
+                if (newDistance < distances.get(edge.to)) {
+                    distances.replace(edge.to, newDistance);
+                    previousNodes.put(edge.to,  current);
+                    queue.add(new NodeEntry(edge.to, newDistance));
+                }
+            }
+        }
+
+        ArrayList<String> list = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        stack.push(toNode);
+
+        var previous = previousNodes.get(toNode);
+
+        while (previous !=null){
+            stack.push(previous);
+            previous = previousNodes.get(previous);
+        }
+
+        while (!stack.isEmpty()){
+            list.add(stack.pop().label);
+        }
+
+        return list;
+    }
 }
