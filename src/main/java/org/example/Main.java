@@ -37,7 +37,8 @@ public class Main {
         graph.addEdge("KSM", "MSA", 8);
         graph.addEdge("KLF", "MSA", 1);
         graph.print();
-        System.out.println(graph.shortestDistance("KSM", "MSA"));
-        System.out.println(graph.shortestPath("KSM", "MSA"));
+        System.out.println("Shortest Distance: "+graph.shortestDistance("KSM", "MSA"));
+        System.out.println("Shortest Path: "+graph.shortestPath("KSM", "MSA"));
+        System.out.println("Has Cycle: "+graph.hasCycle());
     }
 }
