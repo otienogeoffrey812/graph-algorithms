@@ -17,3 +17,4 @@
 * Shortest Distance
 * Shortest Path - Dijkstra's Algorithm
 * Cycle Detection
+* Minimum Spanning Tree - Prim's Algorithm

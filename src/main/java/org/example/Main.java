@@ -40,5 +40,10 @@ public class Main {
         System.out.println("Shortest Distance: "+graph.shortestDistance("KSM", "MSA"));
         System.out.println("Shortest Path: "+graph.shortestPath("KSM", "MSA"));
         System.out.println("Has Cycle: "+graph.hasCycle());
+
+        System.out.println("Minimum Spanning Tree: ");
+        var tree = graph.minimumSpanningTree();
+        tree.print();
+
     }
 }
